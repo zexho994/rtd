@@ -1,12 +1,12 @@
 package src
 
 type RTDAddr struct {
-	ip   string
+	host string
 	port int
 }
 
-func (r RTDAddr) Ip() string {
-	return r.ip
+func (r RTDAddr) Host() string {
+	return r.host
 }
 
 func (r RTDAddr) Port() int {
