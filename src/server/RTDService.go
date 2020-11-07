@@ -11,13 +11,13 @@ var port = flag.Int("port", 9944, "listening port , 5000 ~ 65535")
 
 func main() {
 	// bind
-	ra, err := src.Bind(*host, *port)
+	ra, err := src.RTDBind(*host, *port)
 	if err != nil {
 		panic("rtd bind error " + err.Error())
 	}
 
 	// listen
-	conn, err := src.Listen(ra)
+	conn, err := src.RTDListen(ra)
 	if err != nil {
 		panic("rtd listen error " + err.Error())
 	}
