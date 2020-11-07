@@ -2,6 +2,7 @@ package main
 
 import (
 	"flag"
+	"fmt"
 	"github.com/zouzhihao-994/rtd/src"
 )
 
@@ -14,10 +15,22 @@ func main() {
 	if err != nil {
 		panic("rtd bind error " + err.Error())
 	}
+
 	// listen
 	conn, err := src.Listen(ra)
 	if err != nil {
 		panic("rtd listen error " + err.Error())
 	}
-	conn.LoopRead()
+	fmt.Println("start listening...")
+
+	// read
+	data := make([]byte, 1024)
+	for {
+		msg, err := conn.Read(data)
+		if err != nil {
+			fmt.Println("rtd conn read error ,", err.Error())
+		} else {
+			fmt.Println("rcv: ", msg)
+		}
+	}
 }

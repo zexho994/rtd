@@ -1,7 +1,6 @@
 package src
 
 import (
-	"fmt"
 	"net"
 )
 
@@ -15,18 +14,20 @@ func (r *RTDConn) Read(b []byte) (msg string, err error) {
 	if err != nil {
 		return "", err
 	}
-	data := string(b[:l])
-	fmt.Println("receive: " + data)
-	return data, nil
+	return string(b[:l]), nil
+}
+
+func (r *RTDConn) WriteBytes(b []byte) (int, error) {
+	l, err := r.conn.Write(b)
+	if err != nil {
+		return -1, RTDError{msg: "rtd conn write bytes error"}
+	}
+	return l, nil
 }
 
 // write msg to the other party
-func (r *RTDConn) Write(msg string) (n int, err error) {
-	l, err := r.conn.Write([]byte(msg))
-	if err != nil {
-		return -1, err
-	}
-	return l, nil
+func (r *RTDConn) WriteStr(msg string) (n int, err error) {
+	return r.WriteBytes([]byte(msg))
 }
 
 func (r *RTDConn) LoopRead() {
