@@ -23,7 +23,6 @@ func main() {
 		fmt.Print("> ")
 		in := bufio.NewReader(os.Stdin)
 		b, _, err := in.ReadLine()
-
 		// write to rtd
 		_, err = rc.WriteBytes(b)
 		if err != nil {

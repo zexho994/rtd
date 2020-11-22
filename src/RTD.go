@@ -20,7 +20,7 @@ func RTDListen(addr *RTDAddr) (*RTDConn, error) {
 	ua := net.UDPAddr{IP: ip, Port: addr.port, Zone: ""}
 	conn, err := net.ListenUDP("udp", &ua)
 	if err != nil {
-		return nil, err
+		return nil, RTDError{msg: "rtd listen error , " + err.Error()}
 	}
 	rc := RTDConn{conn: conn}
 	return &rc, nil

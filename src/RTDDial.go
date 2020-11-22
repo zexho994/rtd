@@ -15,11 +15,8 @@ func Dial(host string, port int) (*RTDConn, error) {
 
 	// udp dial
 	conn, err := net.Dial("udp", host+":"+strconv.Itoa(port))
-
-	//todo syn ack
-
 	if err != nil {
-		return nil, err
+		return nil, RTDError{msg: "rtd dial error" + err.Error()}
 	}
 	rc := RTDConn{
 		conn: conn,

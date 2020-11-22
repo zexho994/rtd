@@ -15,7 +15,6 @@ func main() {
 	if err != nil {
 		panic("rtd bind error " + err.Error())
 	}
-
 	// listen
 	conn, err := src.RTDListen(ra)
 	if err != nil {
